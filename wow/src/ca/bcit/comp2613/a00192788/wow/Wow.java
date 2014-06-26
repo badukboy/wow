@@ -9,6 +9,9 @@ import java.util.Random;
 import org.apache.log4j.Logger;
 import org.apache.log4j.PropertyConfigurator;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
+
 
 /**
  * 
@@ -107,7 +110,8 @@ public class Wow {
 			int level = getRandomLevel();
 			int strength = getRandomStrength();
 			int armour = getRandomArmour();
-			Character character = new Character(race, level, strength, armour);
+			int stamina = rand.nextInt();
+			Character character = new Character(race, level, strength, armour, stamina);
 			retval.add(character);
 		}
 		return retval;
@@ -148,13 +152,20 @@ public class Wow {
 	}
 
 	private static void printCharacters(ArrayList<Character> characters) {
-		for (Character character : characters) {
-			// now includes the character's armour
-			System.out.println("Level: " + character.getLevel() + ", Strength: " 
-					+ character.getStrength() + ", Armour: " + character.getArmour()
-					+ ", Race: " + character.getRace());
+//		for (Character character : characters) {
+//			// now includes the character's armour
+//			System.out.println("Level :   " + character.getLevel() + ", Strength: " 
+//					+ character.getStrength() + ", Armour: " + character.getArmour()
+//					+ ", Race: " + character.getRace());
+//		}
+		ObjectMapper objectMapper = new ObjectMapper();
+		try {
+			String jsonStr = objectMapper.writeValueAsString(characters);
+			System.out.println(jsonStr);
+		} catch (JsonProcessingException e) {
+			e.printStackTrace();
 		}
-
+		
 	}
 	
 	private static void checkForPandaren(ArrayList<Character> characters) throws DontHaveTheExpansionException {
@@ -188,7 +199,7 @@ public class Wow {
 	public static ArrayList<Character> myCharactersAfterMyArchNemesisHacksIntoMyAccount() {
 		ArrayList<Character> retval = new ArrayList<Character>();
 		for (int i = 1; i <= 85; i++) {
-			Character character = new Character(Race.ORC, i, i, i);
+			Character character = new Character(Race.ORC, i, i, i, i);
 			retval.add(character);
 		}
 		Collections.shuffle(retval);

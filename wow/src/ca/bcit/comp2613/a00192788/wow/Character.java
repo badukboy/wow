@@ -5,13 +5,15 @@ public class Character {
 	private int level;
 	private int strength;
 	private int armour;
+	private int stamina;
 	
-	public Character(Race race, int level, int strength, int armour) {
+	public Character(Race race, int level, int strength, int armour, int stamina) {
 		super();
 		this.race = race;
 		this.level = level;
 		this.strength = strength;
 		this.armour = armour;
+		this.stamina = stamina;
 	}
 	public Race getRace() {
 		return race;
@@ -36,6 +38,12 @@ public class Character {
 	}
 	public void setArmour(int armour) {
 		this.armour = armour;
+	}
+	public int getStamina() {
+		return stamina;
+	}
+	public void setStamina(int stamina) {
+		this.stamina = stamina;
 	}
 		
 }

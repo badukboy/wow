@@ -1,0 +1,46 @@
+<html>
+<script src="bower_components/jquery/dist/jquery.js"></script>
+
+<script>
+
+$.ajax({
+    url: 'characters.json',
+    type: "GET",
+    dataType: 'json',
+    success: function (data) {
+		var outStr = "";
+		var styleString = "";
+    	for (var i = 0; i < data.length; i++) {
+    		console.log("HERE")
+    		
+    		if (data[i].race == "ORC") {
+    			styleString = "style='color: green'";
+    		} else {
+    			styleString = "";
+    		}
+    		outStr += "<tr>" + "<td>" + data[i].level + "</td>" + "<td " + styleString + ">" + data[i].race + "</td>" + "</tr>";
+    		
+    	}
+    	$("#characters").html(outStr);
+    }
+});
+
+
+
+
+
+
+</script>
+
+
+
+<table border="1">
+<tr>
+<th>Level</th>
+<th>Race</th>
+</tr>
+<tbody id="characters"></tbody>
+</table>
+
+
+</html>
